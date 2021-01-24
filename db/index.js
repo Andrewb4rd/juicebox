@@ -1,12 +1,14 @@
 const { Client } = require("pg");
 
-const client = new Client({
-  user: "postgres",
-  host: "localhost",
-  database: "juicebox_dev",
-  password: "2112",
-  port: 5432,
-});
+const client = new Client(
+  process.env.DATABASE_URL || {
+    user: "postgres",
+    host: "localhost",
+    database: "juicebox_dev",
+    password: "2112",
+    port: 5432,
+  }
+);
 
 async function createUser({ username, password, name, location }) {
   try {
